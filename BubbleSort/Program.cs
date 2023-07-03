@@ -2,14 +2,20 @@
 {
     static List<T> BubbleSort<T>(List<T> list) where T : IComparable<T>
     {
-        for (int i = 0; i < list.Count; i++)
+        for (int i = 1; i < list.Count; i++)
         {
-            for (int j = 0; j < list.Count; j++)
+            bool swapped = false;
+            for (int j = 0; j < list.Count - i; j++)
             {
-                if (list[i].CompareTo(list[j]) < 0)
+                if (list[j + 1].CompareTo(list[j]) < 0)
                 {
-                    (list[i], list[j]) = (list[j], list[i]);
+                    (list[j], list[j + 1]) = (list[j + 1], list[j]);
+                    swapped = true;
                 }
+            }
+            if (!swapped)
+            {
+                return list;
             }
         }
         return list;
