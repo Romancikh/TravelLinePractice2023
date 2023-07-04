@@ -1,7 +1,8 @@
 using System.Text;
 
-Console.OutputEncoding = Encoding.UTF8;
-Console.InputEncoding = Encoding.UTF8;
+Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+Console.OutputEncoding = Encoding.GetEncoding(1251);
+Console.InputEncoding = Encoding.GetEncoding(1251);
 Console.Write("Фамилия: ");
 string lastName = Console.ReadLine();
 Console.Write("Имя: ");
