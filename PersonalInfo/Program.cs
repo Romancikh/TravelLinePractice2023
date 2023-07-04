@@ -1,4 +1,6 @@
 using System.Text;
+using System.Text.RegularExpressions;
+
 class Program
 {
     static string firstName = string.Empty;
@@ -7,6 +9,11 @@ class Program
     static string email = string.Empty;
     static string github = string.Empty;
     static int age = 0;
+    static bool IsValidEmail(string email)
+    {
+        string pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+        return Regex.IsMatch(email, pattern);
+    }
     static void ReadData()
     {
         Console.WriteLine("Введите данные");
@@ -18,16 +25,22 @@ class Program
         middleName = Console.ReadLine()!;
         Console.Write("Возраст: ");
 
-        if (!int.TryParse(Console.ReadLine(), out age))
+        bool isValidAge = int.TryParse(Console.ReadLine(), out age);
+        while (!isValidAge || age <= 0)
         {
-            Console.WriteLine("Не удалось получить возраст");
-            age = 0;
+            Console.WriteLine("Некорректный возраст. Пожалуйста, введите положительное число.");
+            isValidAge = int.TryParse(Console.ReadLine(), out age);
         }
 
         Console.Write("Email: ");
-        email = Console.ReadLine();
+        email = Console.ReadLine()!;
+        while (!IsValidEmail(email))
+        {
+            Console.WriteLine("Некорректный email. Пожалуйста, введите корректный email.");
+            email = Console.ReadLine()!;
+        }
         Console.Write("GitHub: ");
-        github = Console.ReadLine();
+        github = Console.ReadLine()!;
         Console.Clear();
     }
     static void WriteData()
@@ -50,4 +63,3 @@ class Program
         WriteData();
     }
 }
-
