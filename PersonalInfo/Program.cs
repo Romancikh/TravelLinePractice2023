@@ -1,18 +1,28 @@
 using System.Text;
 
 Console.OutputEncoding = Encoding.UTF8;
+Console.InputEncoding = Encoding.UTF8;
 Console.Write("Фамилия: ");
-string FirstName = Console.ReadLine();
+string lastName = Console.ReadLine();
 Console.Write("Имя: ");
-string LastName = Console.ReadLine();
+string firstName = Console.ReadLine();
 Console.Write("Отчество: ");
-string MiddleName = Console.ReadLine();
+string middleName = Console.ReadLine();
 Console.Write("Возраст: ");
 if (!int.TryParse(Console.ReadLine(), out int age))
 {
     Console.WriteLine("Не удалось получить возраст");
+    age = 0;
 }
 Console.Write("Email: ");
 string email = Console.ReadLine();
 Console.Write("GitHub: ");
 string github = Console.ReadLine();
+Console.WriteLine();
+Console.WriteLine("Персональные данные");
+Console.WriteLine($"\tФамилия: {lastName}");
+Console.WriteLine($"\tИмя: {firstName}");
+Console.WriteLine($"\tОтчество: {middleName}");
+Console.WriteLine($"\tВозраст: {age}");
+Console.WriteLine($"\tEmail: {email}");
+Console.WriteLine($"\tGitHub: {github}");
