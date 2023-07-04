@@ -1,27 +1,33 @@
 using System.Text;
 class Program
 {
+    static string firstName = string.Empty;
+    static string middleName = string.Empty;
+    static string lastName = string.Empty;
+    static string email = string.Empty;
+    static string github = string.Empty;
+    static int age = 0;
     static void Main(string[] args)
     {
         Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         Console.OutputEncoding = Encoding.GetEncoding(1251);
         Console.InputEncoding = Encoding.GetEncoding(1251);
         Console.Write("Фамилия: ");
-        string lastName = Console.ReadLine();
+        lastName = Console.ReadLine();
         Console.Write("Имя: ");
-        string firstName = Console.ReadLine();
+        firstName = Console.ReadLine();
         Console.Write("Отчество: ");
-        string middleName = Console.ReadLine();
+        middleName = Console.ReadLine();
         Console.Write("Возраст: ");
-        if (!int.TryParse(Console.ReadLine(), out int age))
+        if (!int.TryParse(Console.ReadLine(), out age))
         {
             Console.WriteLine("Не удалось получить возраст");
             age = 0;
         }
         Console.Write("Email: ");
-        string email = Console.ReadLine();
+        email = Console.ReadLine();
         Console.Write("GitHub: ");
-        string github = Console.ReadLine();
+        github = Console.ReadLine();
         Console.WriteLine();
         Console.WriteLine("Персональные данные");
         Console.WriteLine($"\tФамилия: {lastName}");
