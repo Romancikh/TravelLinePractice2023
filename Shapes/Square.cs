@@ -2,7 +2,17 @@
 {
     public class Square : IShape
     {
-        public double SideLength { get; set; }
+        private double _sideLength;
+        public double SideLength
+        {
+            get { return _sideLength; }
+            set
+            {
+                if ( value <= 0 )
+                    throw new ArgumentException( "Side length must be a positive value." );
+                _sideLength = value;
+            }
+        }
         public Square( double sideLength )
         {
             SideLength = sideLength;
