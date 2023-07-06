@@ -1,6 +1,6 @@
 ﻿namespace Shapes
 {
-    internal class Circle : IShape
+    public class Circle : IShape
     {
         private double _radius;
 
@@ -10,7 +10,7 @@
             set
             {
                 if ( value <= 0 )
-                    throw new ArgumentException( "Side length must be a positive value." );
+                    throw new ArgumentException( "Radius must be a positive value." );
                 _radius = value;
             }
         }
