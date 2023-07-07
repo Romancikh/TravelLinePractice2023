@@ -9,34 +9,26 @@ namespace Shapes.Tests
         public void CalculateArea_WithValidSideLengths_ReturnsCorrectArea()
         {
             // Arange
-            double side1 = 5;
-            double side2 = 6;
-            double side3 = 7;
-            Triangle triangle = new( side1, side2, side3 );
+            Triangle triangle = new( 5, 6, 7 );
 
             // Act
             double area = triangle.CalculateArea();
 
             // Assert
-            double expectedArea = 14.69694;
-            Assert.AreEqual( expectedArea, area, 0.00001 );
+            Assert.AreEqual( 14.69694, area, 0.00001 );
         }
 
         [Test]
         public void CalculatePerimeter_WithValidSideLengths_ReturnsCorrectPerimeter()
         {
             // Arange
-            double side1 = 5;
-            double side2 = 6;
-            double side3 = 7;
-            Triangle triangle = new( side1, side2, side3 );
+            Triangle triangle = new( 5, 6, 7 );
 
             // Act
             double perimeter = triangle.CalculatePerimeter();
 
             // Assert
-            double expectedPerimeter = 18;
-            Assert.AreEqual( expectedPerimeter, perimeter );
+            Assert.AreEqual( 18, perimeter );
         }
     }
 }

@@ -9,30 +9,26 @@ namespace Shapes.Tests
         public void CalculateArea_WithValidSideLength_ReturnsCorrectArea()
         {
             // Arrange
-            double sideLength = 5;
-            Square square = new( sideLength );
+            Square square = new( 5 );
 
             // Act
             double area = square.CalculateArea();
 
             // Assert
-            double expectedArea = 25;
-            Assert.AreEqual( expectedArea, area );
+            Assert.AreEqual( 25, area );
         }
 
         [Test]
         public void CalculatePerimeter_WithValidSideLength_ReturnsCorrectPerimeter()
         {
             // Arrange
-            double sideLength = 5;
-            Square square = new( sideLength );
+            Square square = new( 5 );
 
             // Act
             double perimeter = square.CalculatePerimeter();
 
             // Assert
-            double expectedPerimeter = 20;
-            Assert.AreEqual( expectedPerimeter, perimeter );
+            Assert.AreEqual( 20, perimeter );
         }
     }
 }
