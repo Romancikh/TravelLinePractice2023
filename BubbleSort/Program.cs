@@ -20,13 +20,13 @@
         }
         return list;
     }
-    static void Main(String[] args)
+    static void Main(string[] args)
     {
         List<int> unsortedList = new()
         {
             5, 9, 1, 8, 2, 7, 4, 6, 3, 10, 5, 11, 4
         };
-        List<int> sortedList = Program.BubbleSort(unsortedList);
-        sortedList.ForEach(item => Console.WriteLine(item));
+        List<int> sortedList = BubbleSort(unsortedList);
+        Console.WriteLine(string.Join(", ", sortedList ));
     }
 }
