@@ -6,6 +6,27 @@ namespace Shapes.Tests
     public class TriangleTests
     {
         [Test]
+        public void Constructor_NegativeSideLengths_ThrowsArgumentException()
+        {
+            // Arrange, Act, Assertion
+            Assert.Throws<ArgumentException>( () => new Triangle( -1, -1, -1 ) );
+        }
+
+        [Test]
+        public void Constructor_ZeroSideLengths_ThrowsArgumentException()
+        {
+            // Arrange, Act, Assertion
+            Assert.Throws<ArgumentException>( () => new Triangle( 0, 0, 0) );
+        }
+
+        [Test]
+        public void Constructor_WrongSideLengths_ThrowsArgumentException()
+        {
+            // Arrange, Act, Assertion
+            Assert.Throws<ArgumentException>( () => new Triangle( 1, 2, 4 ) );
+        }
+
+        [Test]
         public void CalculateArea_WithValidSideLengths_ReturnsCorrectArea()
         {
             // Arange

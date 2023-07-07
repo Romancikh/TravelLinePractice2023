@@ -6,6 +6,20 @@ namespace Shapes.Tests
     public class CircleTests
     {
         [Test]
+        public void Constructor_NegativeRadius_ThrowsArgumentException()
+        {
+            // Arrange, Act, Assertion
+            Assert.Throws<ArgumentException>(() => new Circle(-1));
+        }
+
+        [Test]
+        public void Constructor_ZeroRadius_ThrowsArgumentException()
+        {
+            // Arrange, Act, Assertion
+            Assert.Throws<ArgumentException>( () => new Circle( 0 ) );
+        }
+
+        [Test]
         public void CalculateArea_WithValidRadius_ReturnsCorrectArea()
         {
             // Arrange

@@ -6,6 +6,20 @@ namespace Shapes.Tests
     public class SquareTests
     {
         [Test]
+        public void Constructor_NegativeSideLength_ThrowsArgumentException()
+        {
+            // Arrange, Act, Assertion
+            Assert.Throws<ArgumentException>( () => new Square( -1 ) );
+        }
+
+        [Test]
+        public void Constructor_ZeroSideLength_ThrowsArgumentException()
+        {
+            // Arrange, Act, Assertion
+            Assert.Throws<ArgumentException>( () => new Square( 0 ) );
+        }
+
+        [Test]
         public void CalculateArea_WithValidSideLength_ReturnsCorrectArea()
         {
             // Arrange
