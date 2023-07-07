@@ -16,8 +16,8 @@ namespace Shapes.Tests
             double area = circle.CalculateArea();
 
             // Assert
-            double expectedArea = Math.PI * radius * radius;
-            Assert.AreEqual( expectedArea, area );
+            double expectedArea = 78.53982;
+            Assert.AreEqual( expectedArea, area, 0.00001 );
         }
 
         [Test]
@@ -31,8 +31,8 @@ namespace Shapes.Tests
             double perimeter = circle.CalculatePerimeter();
 
             // Assert
-            double expectedPerimeter = 2 * Math.PI * radius;
-            Assert.AreEqual( expectedPerimeter, perimeter );
+            double expectedPerimeter = 31.41593;
+            Assert.AreEqual( expectedPerimeter, perimeter, 0.00001 );
         }
     }
 }

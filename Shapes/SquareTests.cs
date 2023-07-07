@@ -16,7 +16,7 @@ namespace Shapes.Tests
             double area = square.CalculateArea();
 
             // Assert
-            double expectedArea = sideLength * sideLength;
+            double expectedArea = 25;
             Assert.AreEqual( expectedArea, area );
         }
 
@@ -31,7 +31,7 @@ namespace Shapes.Tests
             double perimeter = square.CalculatePerimeter();
 
             // Assert
-            double expectedPerimeter = 4 * sideLength;
+            double expectedPerimeter = 20;
             Assert.AreEqual( expectedPerimeter, perimeter );
         }
     }

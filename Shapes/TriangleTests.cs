@@ -18,9 +18,8 @@ namespace Shapes.Tests
             double area = triangle.CalculateArea();
 
             // Assert
-            double semiperimeter = triangle.CalculatePerimeter() / 2;
-            double expectedArea = Math.Sqrt( semiperimeter * ( semiperimeter - side1 ) * ( semiperimeter - side2 ) * ( semiperimeter - side3 ) );
-            Assert.AreEqual( expectedArea, area );
+            double expectedArea = 14.69694;
+            Assert.AreEqual( expectedArea, area, 0.00001 );
         }
 
         [Test]
@@ -36,7 +35,7 @@ namespace Shapes.Tests
             double perimeter = triangle.CalculatePerimeter();
 
             // Assert
-            double expectedPerimeter = side1 + side2 + side3;
+            double expectedPerimeter = 18;
             Assert.AreEqual( expectedPerimeter, perimeter );
         }
     }
