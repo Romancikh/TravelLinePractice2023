@@ -7,7 +7,7 @@
         public double SideLength
         {
             get { return _sideLength; }
-            set
+            private set
             {
                 if ( value <= 0 )
                     throw new ArgumentException( "Side length must be a positive value." );

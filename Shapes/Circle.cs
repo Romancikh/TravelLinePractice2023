@@ -7,7 +7,7 @@
         public double Radius
         {
             get { return _radius; }
-            set
+            private set
             {
                 if ( value <= 0 )
                     throw new ArgumentException( "Radius must be a positive value." );

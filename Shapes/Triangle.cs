@@ -9,7 +9,7 @@
         public double Side1
         {
             get { return _side1; }
-            set
+            private set
             {
                 if ( value <= 0 )
                     throw new ArgumentException( "Side1 must be a positive value." );
@@ -20,7 +20,7 @@
         public double Side2
         {
             get { return _side2; }
-            set
+            private set
             {
                 if ( value <= 0 )
                     throw new ArgumentException( "Side2 must be a positive value." );
@@ -31,7 +31,7 @@
         public double Side3
         {
             get { return _side3; }
-            set
+            private set
             {
                 if ( value <= 0 )
                     throw new ArgumentException( "Side3 must be a positive value." );
@@ -59,7 +59,7 @@
         public double CalculateArea()
         {
             double semiperimeter = CalculatePerimeter() / 2;
-            return Math.Sqrt( semiperimeter * ( semiperimeter - Side1 ) * (semiperimeter - Side2) * (semiperimeter - Side3));
+            return Math.Sqrt( semiperimeter * ( semiperimeter - Side1 ) * ( semiperimeter - Side2 ) * ( semiperimeter - Side3 ) );
         }
 
         public double CalculatePerimeter()
