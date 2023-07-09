@@ -9,7 +9,7 @@ namespace Shapes.Tests
         public void Constructor_NegativeRadius_ThrowsArgumentException()
         {
             // Arrange, Act, Assertion
-            Assert.Throws<ArgumentException>(() => new Circle(-1));
+            Assert.Throws<ArgumentException>( () => new Circle( -1 ) );
         }
 
         [Test]
