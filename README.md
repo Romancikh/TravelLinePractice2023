@@ -1,9 +1,10 @@
 # HospitalDb
 ## Описание
-В этой базе данных хранится информация о пациентах, врачах и приёмах в поликлинике. База данных состоит из трёх таблиц: Пациент (Patient), Врач (Doctor) и Приём (Reception). Таблица Пациент содержит идентификатор (PatientId), имя (FirstName), фамилию (LastName) и диагноз пациента (Illness). Таблица Врач содержит идентификатор (DoctorId), имя (FirstName), фамилию (LastName) и специализацию врача (Specialty). Таблица Приём содержит идентификатор (ReceptionId), идентификатор врача (DoctorId), идентификатор пациента (PatientId) и номер кабинета, где проходит приём (RoomNumber). 
+В этой базе данных хранится информация о пациентах, врачах и приёмах в поликлинике. База данных состоит из трёх таблиц: Пациент (Patient), Врач (Doctor) и Приём (Reception). Таблица Пациент содержит идентификатор (PatientId), имя (FirstName), фамилию (LastName) и диагноз пациента (Illness). Таблица Врач содержит идентификатор (DoctorId), имя (FirstName), фамилию (LastName) и специализацию врача (Specialty). Таблица Приём содержит идентификатор (ReceptionId), идентификатор врача (DoctorId), идентификатор пациента (PatientId) и номер кабинета, где проходит приём (RoomNumber).  
 Связь между таблицами осуществляется посредством Id врача и пациента, которые являются внешними ключами в таблице Приём. Это означает, что каждая запись в таблице Приём ссылается на одну запись в таблице Врач и одну запись в таблице Пациент. Одному врачу могут соответствовать несколько приёмов. Одному пациенту могут соответствовать несколько приёмов. Одному приёму может соответствовать только один врач и один пациент.
 ## ER-диаграмма
 ![ER-Diagram](https://github.com/Romancikh/HospitalDb/blob/main/images/er.png?raw=true)
+
 Ссылка: https://clck.ru/34wfDS
 ## Запросы
 ### CREATE
@@ -129,7 +130,7 @@ update Reception set RoomNumber = 103 where DoctorId = 1 and PatientId = 1
 delete from Patient where PatientId = 10
 ```
 ### SELECT with JOIN
-Для примеров некоторые данные из таблиц были удалены
+Для примеров некоторые данные из таблиц были удалены.
 #### INNER
 ```sql
 select
@@ -143,6 +144,7 @@ join Doctor on Reception.DoctorId = Doctor.DoctorId
 join Patient on Reception.PatientId = Patient.PatientId
 ```
 Этот запрос соединяет таблицы `Recepеtion`, `Doctor` и `Patient` по `DoctorId` и `PatientId` и достаёт имена врачей, пациентов и номер комнаты.
+
 ![INNER JOIN example](https://github.com/Romancikh/HospitalDb/blob/main/images/inner.png?raw=true)
 #### LEFT
 ```sql
@@ -153,6 +155,7 @@ from Doctor
 left join Reception on Doctor.DoctorId = Reception.DoctorId
 ```
 Этот запрос соединяет таблицы `Recepеtion` и `Doctor` по `DoctorId`. Если у врача не назначено приёмов (нет номера кабинета), то в соответствующем столбце будет **NULL**.
+
 ![LEFT JOIN example](https://github.com/Romancikh/HospitalDb/blob/main/images/left.png?raw=true)
 #### RIGHT
 ```sql
@@ -163,4 +166,5 @@ from Reception
 right join Patient on Reception.PatientId = Patient.PatientId
 ```
 Этот запрос соединяет таблицы `Recepеtion` и `Patient` по `PatientId`. Если у пациента не назначено приёмов (нет номера кабинета), то в соответствующем столбце будет **NULL**.
+
 ![RIGHT JOIN example](https://github.com/Romancikh/HospitalDb/blob/main/images/right.png?raw=true)
