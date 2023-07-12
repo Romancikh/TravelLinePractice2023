@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalDb", "HospitalDb\Ho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{4CE9E321-6530-4AB7-B504-D7C10E52C932}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseProvider", "DatabaseProvider\DatabaseProvider.csproj", "{DBD4D795-CF0B-4BCB-9D93-3B3916EC787D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4CE9E321-6530-4AB7-B504-D7C10E52C932}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CE9E321-6530-4AB7-B504-D7C10E52C932}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CE9E321-6530-4AB7-B504-D7C10E52C932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBD4D795-CF0B-4BCB-9D93-3B3916EC787D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBD4D795-CF0B-4BCB-9D93-3B3916EC787D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBD4D795-CF0B-4BCB-9D93-3B3916EC787D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBD4D795-CF0B-4BCB-9D93-3B3916EC787D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
