@@ -13,6 +13,5 @@
             if ( Doctor == null || Patient == null ) return $"{ReceptionId} - {RoomNumber}";
             return $"{Doctor}, {Patient} - {RoomNumber}";
         }
-
     }
 }

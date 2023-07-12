@@ -12,7 +12,7 @@ namespace DatabaseProvider.Repositories.Implementations
         }
         public Patient? GetById( int id )
         {
-            return Entities.Where( p => p.PatientId == id ).FirstOrDefault();
+            return Entities.FirstOrDefault( p => p.PatientId == id );
         }
     }
 }
