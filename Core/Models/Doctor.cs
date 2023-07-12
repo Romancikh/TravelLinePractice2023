@@ -9,7 +9,7 @@
         public List<Reception> Receptions { get; set; } = new List<Reception>();
         public override string ToString()
         {
-            return $"{FirstName} {LastName} - {Specialty}";
+            return $"{DoctorId}) {FirstName} {LastName} - {Specialty}";
         }
     }
 }

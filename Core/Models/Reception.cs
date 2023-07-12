@@ -10,8 +10,8 @@
         public int RoomNumber { get; set; }
         public override string ToString()
         {
-            if ( Doctor == null || Patient == null ) return $"{ReceptionId} - {RoomNumber}";
-            return $"{Doctor}, {Patient} - {RoomNumber}";
+            if ( Doctor == null || Patient == null ) return $"{ReceptionId}) {RoomNumber}";
+            return $"{ReceptionId}) {Doctor}, {Patient} - {RoomNumber}";
         }
     }
 }
