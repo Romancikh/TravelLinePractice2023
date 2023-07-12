@@ -9,7 +9,7 @@ namespace DatabaseProvider.Configurations
         public void Configure( EntityTypeBuilder<Doctor> builder )
         {
             builder.ToTable( "Doctor" ).HasKey( d => d.DoctorId );
-            builder.Property( d => d.FirstName )
+            builder.Property( d => d.DoctorId )
                 .HasColumnName( "DoctorId" )
                 .IsRequired();
             builder.Property( d => d.FirstName )
