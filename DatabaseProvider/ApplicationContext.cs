@@ -5,7 +5,7 @@ namespace DatabaseProvider
 {
     public class ApplicationContext : DbContext
     {
-        private readonly string _connectionString;
+        private readonly string? _connectionString;
         public ApplicationContext( DbContextOptions<ApplicationContext> options ) : base( options ) { }
         public ApplicationContext( string connectionString )
         {
