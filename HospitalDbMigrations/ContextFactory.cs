@@ -9,7 +9,7 @@ namespace HospitalDbMigrations
         public ApplicationContext CreateDbContext( string[] args )
         {
             string connectionString =
-                "Data Source=MILKYWAY\\SQLEXPRESS;Initial Catalog=Books;Pooling=true;Integrated Security=SSPI";
+                "Data Source=MILKYWAY\\SQLEXPRESS;Initial Catalog=HospitalDb;Pooling=true;Integrated Security=SSPI";
             var optionBuilder = new DbContextOptionsBuilder<ApplicationContext>();
             optionBuilder.UseSqlServer( connectionString, assembly => assembly.MigrationsAssembly( "HospitalDbMigrations" ) );
             return new ApplicationContext( optionBuilder.Options );
