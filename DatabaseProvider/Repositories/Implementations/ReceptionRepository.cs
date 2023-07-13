@@ -16,11 +16,11 @@ namespace DatabaseProvider.Repositories.Implementations
         }
         public List<Reception> GetByDoctorId( int id )
         {
-            return Entities.Where( r => r.PatientId == id ).ToList();
+            return Entities.Where( r => r.DoctorId == id ).ToList();
         }
         public List<Reception> GetByPatientId( int id )
         {
-            return Entities.Where( r => r.DoctorId == id ).ToList();
+            return Entities.Where( r => r.PatientId == id ).ToList();
         }
     }
 }
