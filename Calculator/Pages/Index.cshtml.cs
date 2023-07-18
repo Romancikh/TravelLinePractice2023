@@ -14,7 +14,7 @@ namespace Calculator.Pages
         public int SecondNumber { get; set; }
 
         [BindProperty]
-        public string Operation { get; set; }
+        public string Operation { get; set; } = string.Empty;
 
         public IndexModel( ILogger<IndexModel> logger )
         {
