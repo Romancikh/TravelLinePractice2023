@@ -10,9 +10,9 @@
         <thead>
             <tr class="fs-6 text-center">
                 <td />
-                @foreach ( char carry in Model.CarryLine )
+                @foreach ( string carry in Model.Line )
                 {
-                    if ( carry != '0' )
+                    if ( carry != "0" )
                     {
                         <td>@carry</td>
                     }

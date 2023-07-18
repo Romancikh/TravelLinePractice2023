@@ -13,17 +13,96 @@ namespace Calculator.Pages
 
         public string Result { get; set; } = string.Empty;
 
-        public string CarryLine { get; set; } = "0";
+        public List<string> Line { get; set; } = new();
 
         public void OnGet( string firstNumber, string secondNumber, string operation )
         {
             FirstNumber = firstNumber;
             SecondNumber = secondNumber;
             Operation = operation;
-            Addition();
+            Proceed();
         }
 
-        public void Addition()
+        private void Proceed()
+        {
+            switch ( Operation )
+            {
+                case "addition":
+                    Addition();
+                    break;
+                case "subtraction":
+                    Subtraction();
+                    break;
+                default:
+                    throw new ArgumentException( "Invalid operation" );
+            }
+        }
+
+        private void Subtraction()
+        {
+            int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
+
+            FirstNumber = PadNumber( FirstNumber, maxLength );
+            SecondNumber = PadNumber( SecondNumber, maxLength );
+
+            bool isNegative = false;
+            bool borrow = false;
+            StringBuilder resultBuilder = new();
+            List<string> borrowLine = new();
+
+            if ( int.Parse( FirstNumber ) < int.Parse( SecondNumber ) )
+            {
+                isNegative = true;
+                (FirstNumber, SecondNumber) = (SecondNumber, FirstNumber);
+            }
+
+            for ( int i = maxLength - 1; i >= 0; i-- )
+            {
+                int firstDigit = FirstNumber[ i ] - '0';
+                int secondDigit = SecondNumber[ i ] - '0';
+
+                if ( borrow )
+                {
+                    firstDigit--;
+                    borrow = false;
+                    borrowLine.Insert( 0, "." );
+                }
+
+                if ( firstDigit < secondDigit )
+                {
+                    firstDigit += 10;
+                    borrow = true;
+                    if ( borrowLine.Count == 0 || borrowLine[ 0 ] != "." )
+                    {
+                        borrowLine.Insert( 0, "10" );
+                    }
+                }
+
+                int stepResult = firstDigit - secondDigit;
+                resultBuilder.Insert( 0, stepResult );
+            }
+
+            Result = resultBuilder.ToString().TrimStart( '0' );
+            Line = borrowLine;
+
+            if ( Result.Length == 0 )
+            {
+                Result = "0";
+            }
+
+            if ( isNegative )
+            {
+                (FirstNumber, SecondNumber) = (SecondNumber, FirstNumber);
+                Result = "-" + Result;
+            }
+
+            maxLength = Math.Max( maxLength, Result.Length );
+            FirstNumber = PadNumber( FirstNumber, maxLength );
+            SecondNumber = PadNumber( SecondNumber, maxLength );
+            Result = PadNumber( Result, maxLength );
+        }
+
+        private void Addition()
         {
             int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
 
@@ -32,7 +111,7 @@ namespace Calculator.Pages
 
             int carry = 0;
             StringBuilder resultBuilder = new();
-            StringBuilder carryLineBuilder = new();
+            List<string> carryLine = new();
 
             for ( int i = maxLength - 1; i >= 0; i-- )
             {
@@ -52,7 +131,7 @@ namespace Calculator.Pages
                 }
 
                 resultBuilder.Insert( 0, stepResult );
-                carryLineBuilder.Insert( 0, carry );
+                carryLine.Insert( 0, carry.ToString() );
             }
 
             if ( carry > 0 )
@@ -61,11 +140,11 @@ namespace Calculator.Pages
             }
             else
             {
-                carryLineBuilder.Remove( 0, 1 );
+                carryLine.RemoveAt( 0 );
             }
 
             Result = resultBuilder.ToString();
-            CarryLine = carryLineBuilder.ToString();
+            Line = carryLine;
 
             maxLength = Math.Max( maxLength, Result.Length );
             FirstNumber = PadNumber( FirstNumber, maxLength );
@@ -73,7 +152,7 @@ namespace Calculator.Pages
             Result = PadNumber( Result, maxLength );
         }
 
-        private string PadNumber( string number, int length )
+        private static string PadNumber( string number, int length )
         {
             if ( number.Length < length )
             {
