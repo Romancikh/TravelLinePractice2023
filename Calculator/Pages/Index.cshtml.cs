@@ -7,6 +7,15 @@ namespace Calculator.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        [BindProperty]
+        public int FirstNumber { get; set; }
+
+        [BindProperty]
+        public int SecondNumber { get; set; }
+
+        [BindProperty]
+        public string Operation { get; set; }
+
         public IndexModel( ILogger<IndexModel> logger )
         {
             _logger = logger;
@@ -15,6 +24,11 @@ namespace Calculator.Pages
         public void OnGet()
         {
 
+        }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage( "/Result", new { FirstNumber, Operation, SecondNumber } );
         }
     }
 }
