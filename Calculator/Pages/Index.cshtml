@@ -1,10 +1,29 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData[ "Title" ] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-start">
+    <h1 class="display-4">Calculator</h1>
+    <form>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="firstNumber" name="firstNumber" min="0" value="0" />
+            <label for="firstNuber">First Number</label>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" id="operation" name="operation">
+                <option value="addition">+</option>
+                <option value="subtraction">-</option>
+                <option value="multiplication">*</option>
+                <option value="division">/</option>
+            </select>
+            <label for="operation">Arithmetic Operation</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="secondNumber" name="secondNumber" min="0" value="0" />
+            <label for="secondNuber">Second Number</label>
+        </div>
+        <button type="submit" class="btn btn-primary">=</button>
+    </form>
 </div>
