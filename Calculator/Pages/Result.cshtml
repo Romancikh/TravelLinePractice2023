@@ -6,4 +6,137 @@
 
 <div class="text-start">
     <h1 class="display-4">Result</h1>
+    <table class="table-borderless fs-1 text-end">
+        <thead>
+            <tr class="fs-6 text-center">
+                <td />
+                @foreach ( char carry in Model.CarryLine )
+                {
+                    if ( carry != '0' )
+                    {
+                        <td>@carry</td>
+                    }
+                    else
+                    {
+                        <td />
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody class="border-bottom border-dark">
+            <tr>
+                <td rowspan="2">
+                    @switch ( Model.Operation )
+                    {
+                        case "addition":
+                            <span>+</span>
+                            break;
+                        case "subtraction":
+                            <span>-</span>
+                            break;
+                        default:
+                            <span />
+                            break;
+                    }
+                </td>
+                @{
+                    bool isLeadingZeros = true;
+                    for ( int i = 0; i < Model.FirstNumber.Length; i++ )
+                    {
+                        char digit = Model.FirstNumber[ i ];
+                        if ( digit == '0' )
+                        {
+                            if ( isLeadingZeros )
+                            {
+                                if ( i < Model.FirstNumber.Length - 1 )
+                                {
+                                    <td />
+                                }
+                                else
+                                {
+                                    <td>0</td>
+                                }
+                            }
+                            else
+                            {
+                                <td>@digit</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>@digit</td>
+                            isLeadingZeros = false;
+                        }
+                    }
+                }
+            </tr>
+            <tr>
+                @{
+                    isLeadingZeros = true;
+                    for ( int i = 0; i < Model.SecondNumber.Length; i++ )
+                    {
+                        char digit = Model.SecondNumber[ i ];
+                        if ( digit == '0' )
+                        {
+                            if ( isLeadingZeros )
+                            {
+                                if ( i < Model.SecondNumber.Length - 1 )
+                                {
+                                    <td />
+                                }
+                                else
+                                {
+                                    <td>0</td>
+                                }
+                            }
+                            else
+                            {
+                                <td>@digit</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>@digit</td>
+                            isLeadingZeros = false;
+                        }
+                    }
+                }
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td />
+                @{
+                    isLeadingZeros = true;
+                    for ( int i = 0; i < Model.Result.Length; i++ )
+                    {
+                        char digit = Model.Result[ i ];
+                        if ( digit == '0' )
+                        {
+                            if ( isLeadingZeros )
+                            {
+                                if ( i < Model.Result.Length - 1 )
+                                {
+                                    <td />
+                                }
+                                else
+                                {
+                                    <td>0</td>
+                                }
+                            }
+                            else
+                            {
+                                <td>@digit</td>
+                            }
+                        }
+                        else
+                        {
+                            <td>@digit</td>
+                            isLeadingZeros = false;
+                        }
+                    }
+                }
+            </tr>
+        </tfoot>
+    </table>
 </div>

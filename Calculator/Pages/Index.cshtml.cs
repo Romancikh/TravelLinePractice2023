@@ -8,10 +8,10 @@ namespace Calculator.Pages
         private readonly ILogger<IndexModel> _logger;
 
         [BindProperty]
-        public int FirstNumber { get; set; }
+        public string FirstNumber { get; set; } = string.Empty;
 
         [BindProperty]
-        public int SecondNumber { get; set; }
+        public string SecondNumber { get; set; } = string.Empty;
 
         [BindProperty]
         public string Operation { get; set; } = string.Empty;
