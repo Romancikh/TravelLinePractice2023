@@ -1,13 +1,101 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WebUserUI</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
   </head>
-  <body>
-    <div>Hello, world!</div>
-    <script type="module" src="/main.js"></script>
+  <body class="container">
+    <div class="container bg-success mb-3 d-none" id="resultContainer">
+      <h1 class="text-white">Result</h1>
+      <div class="container bg-success-subtle">
+        <pre id="result"></pre>
+      </div>
+      <br />
+    </div>
+    <div class="container">
+      <h1>Requests</h1>
+      <div class="container mb-3">
+        <h2>GetAll</h2>
+        <div>
+          <b>GET</b> /api/users
+          <button type="button" class="btn btn-primary" id="getAll">Invoke</button>
+        </div>
+      </div>
+      <div class="container mb-3">
+        <h2>GetById</h2>
+        <div>
+          <b>GET</b> /api/users/${userId}
+          <label for="userIdAdd">
+            <input type="number" name="userIdAdd" value="1" id="userIdAdd" />
+          </label>
+          <button type="button" class="btn btn-primary" id="get">Invoke</button>
+        </div>
+      </div>
+      <div class="container mb-3">
+        <h2>Create</h2>
+        <div>
+          <b>POST</b> /api/users
+          <br />
+          <label for="createUserData">
+            <textarea name="createUserData" id="createUserData" cols="150" rows="10">
+{
+  "title": "Mr",
+  "firstName": "Alexey",
+  "lastName": "Ivanov",
+  "role": "User",
+  "email": "example@mail.ru",
+  "password": "qwerty",
+  "confirmPassword": "qwerty"
+}
+            </textarea>
+          </label>
+          <br />
+          <button type="button" class="btn btn-primary" id="create">Invoke</button>
+        </div>
+      </div>
+      <div class="container mb-3">
+        <h2>Update</h2>
+        <div>
+          <b>PUT</b> /api/users/${userId}
+          <br />
+          <label for="updateUserData">
+            <textarea name="updateUserData" id="updateUserData" cols="150" rows="10">
+{
+  "firstName": "Artem",
+  "lastName": "Gaz"
+}
+            </textarea>
+          </label>
+          <label for="userIdUpdate" class="mb-1">
+            <input type="number" name="userIdUpdate" value="1" id="userIdUpdate" />
+          </label>
+          <br />
+          <button type="button" class="btn btn-primary" id="update">Invoke</button>
+        </div>
+      </div>
+      <div class="container mb-3">
+        <h2>Delete</h2>
+        <div>
+          <b>DELETE</b> /api/users/${userId}
+          <label for="userIdDelete">
+            <input type="number" name="userIdDelete" value="1" id="userIdDelete" />
+          </label>
+          <button type="button" class="btn btn-primary" id="delete">Invoke</button>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./main.js"></script>
   </body>
 </html>
