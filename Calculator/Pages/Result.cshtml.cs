@@ -29,9 +29,11 @@ namespace Calculator.Pages
             {
                 case "addition":
                     Addition();
+                    LevelTheLength( true );
                     break;
                 case "subtraction":
                     Subtraction();
+                    LevelTheLength( true );
                     break;
                 default:
                     throw new ArgumentException( "Invalid operation" );
@@ -42,8 +44,7 @@ namespace Calculator.Pages
         {
             int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
 
-            FirstNumber = PadNumber( FirstNumber, maxLength );
-            SecondNumber = PadNumber( SecondNumber, maxLength );
+            LevelTheLength();
 
             bool isNegative = false;
             bool borrow = false;
@@ -94,19 +95,13 @@ namespace Calculator.Pages
             {
                 Result = "-" + Result;
             }
-
-            maxLength = Math.Max( maxLength, Result.Length );
-            FirstNumber = PadNumber( FirstNumber, maxLength );
-            SecondNumber = PadNumber( SecondNumber, maxLength );
-            Result = PadNumber( Result, maxLength );
         }
 
         private void Addition()
         {
             int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
 
-            FirstNumber = PadNumber( FirstNumber, maxLength );
-            SecondNumber = PadNumber( SecondNumber, maxLength );
+            LevelTheLength();
 
             int carry = 0;
             StringBuilder resultBuilder = new();
@@ -144,11 +139,6 @@ namespace Calculator.Pages
 
             Result = resultBuilder.ToString();
             Line = carryLine;
-
-            maxLength = Math.Max( maxLength, Result.Length );
-            FirstNumber = PadNumber( FirstNumber, maxLength );
-            SecondNumber = PadNumber( SecondNumber, maxLength );
-            Result = PadNumber( Result, maxLength );
         }
 
         private static string PadNumber( string number, int length )
@@ -159,6 +149,18 @@ namespace Calculator.Pages
             }
 
             return number;
+        }
+
+        private void LevelTheLength( bool withResult = false )
+        {
+            int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
+            if ( withResult )
+            {
+                maxLength = Math.Max( maxLength, Result.Length );
+                Result = PadNumber( Result, maxLength );
+            }
+            FirstNumber = PadNumber( FirstNumber, maxLength );
+            SecondNumber = PadNumber( SecondNumber, maxLength );
         }
     }
 }
