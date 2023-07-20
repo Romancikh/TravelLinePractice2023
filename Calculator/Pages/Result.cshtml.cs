@@ -25,42 +25,93 @@ namespace Calculator.Pages
 
         private void Proceed()
         {
+            string firstNumber = FirstNumber;
+            bool isFirstNumberNegative = IsNegative( FirstNumber );
+            if ( isFirstNumberNegative ) firstNumber = firstNumber.TrimStart( '-' );
+
+            string secondNumber = SecondNumber;
+            bool isSecondNumberNegative = IsNegative( SecondNumber );
+            if ( isSecondNumberNegative ) secondNumber = secondNumber.TrimStart( '-' );
+
+            string largerNumber = MaxStringNumbers( firstNumber, secondNumber );
+            string smallerNumber = MinStringNumbers( firstNumber, secondNumber );
+
+            string result = string.Empty;
+            List<string> line = new();
+
             switch ( Operation )
             {
                 case "addition":
-                    Addition();
-                    LevelTheLength( true );
+                    if ( isFirstNumberNegative && isSecondNumberNegative )
+                    {
+                        Addition( largerNumber, smallerNumber, ref result, ref line );
+                        result = '-' + result;
+                    }
+                    else if ( isFirstNumberNegative )
+                    {
+                        Subtraction( largerNumber, smallerNumber, ref result, ref line );
+                        if ( firstNumber == largerNumber ) result = '-' + result;
+                    }
+                    else if ( isSecondNumberNegative )
+                    {
+                        Subtraction( largerNumber, smallerNumber, ref result, ref line );
+                        if ( secondNumber == largerNumber ) result = '-' + result;
+                    }
+                    else
+                    {
+                        Addition( largerNumber, smallerNumber, ref result, ref line );
+                    }
                     break;
                 case "subtraction":
-                    Subtraction();
-                    LevelTheLength( true );
+                    if ( isFirstNumberNegative && isSecondNumberNegative )
+                    {
+                        Subtraction( largerNumber, smallerNumber, ref result, ref line );
+                        if ( firstNumber == largerNumber ) result = '-' + result;
+                    }
+                    else if ( isFirstNumberNegative )
+                    {
+                        Addition( largerNumber, smallerNumber, ref result, ref line );
+                        result = '-' + result;
+                    }
+                    else if ( isSecondNumberNegative )
+                    {
+                        Addition( largerNumber, smallerNumber, ref result, ref line );
+                        if ( firstNumber == largerNumber ) result = '-' + result;
+                    }
+                    else
+                    {
+                        Subtraction( largerNumber, smallerNumber, ref result, ref line );
+                        if ( secondNumber == largerNumber )
+                        {
+                            result = '-' + result;
+                            (FirstNumber, SecondNumber) = (SecondNumber, FirstNumber);
+                            FirstNumber = '-' + FirstNumber;
+                            Operation = "addition";
+                        }
+                    }
                     break;
                 default:
                     throw new ArgumentException( "Invalid operation" );
             }
+            Result = result;
+            FixZero();
+            Line = line;
+            LevelTheLength();
         }
 
-        private void Subtraction()
+        /** <summary>Subtracts a smaller number from a larger one</summary> */
+        private static void Subtraction( string largerNumber, string smallerNumber, ref string result, ref List<string> line )
         {
-            int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
+            LevelTheLength( ref largerNumber, ref smallerNumber );
 
-            LevelTheLength();
-
-            bool isNegative = false;
             bool borrow = false;
             StringBuilder resultBuilder = new();
             List<string> borrowLine = new();
 
-            if ( int.Parse( FirstNumber ) < int.Parse( SecondNumber ) )
+            for ( int i = largerNumber.Length - 1; i >= 0; i-- )
             {
-                isNegative = true;
-                (FirstNumber, SecondNumber) = (SecondNumber, FirstNumber);
-            }
-
-            for ( int i = maxLength - 1; i >= 0; i-- )
-            {
-                int firstDigit = FirstNumber[ i ] - '0';
-                int secondDigit = SecondNumber[ i ] - '0';
+                int firstDigit = largerNumber[ i ] - '0';
+                int secondDigit = smallerNumber[ i ] - '0';
 
                 if ( borrow )
                 {
@@ -78,39 +129,37 @@ namespace Calculator.Pages
                         borrowLine.Insert( 0, "10" );
                     }
                 }
+                else if ( firstDigit == largerNumber[ i ] - '0' )
+                {
+                    borrowLine.Insert( 0, "0" );
+                }
 
                 int stepResult = firstDigit - secondDigit;
                 resultBuilder.Insert( 0, stepResult );
             }
 
-            Result = resultBuilder.ToString().TrimStart( '0' );
-            Line = borrowLine;
+            result = resultBuilder.ToString().TrimStart( '0' );
+            line = borrowLine;
 
-            if ( Result.Length == 0 )
+            if ( result.Length == 0 )
             {
-                Result = "0";
-            }
-
-            if ( isNegative )
-            {
-                Result = "-" + Result;
+                result = "0";
             }
         }
 
-        private void Addition()
+        /** <summary>Sums a larger number with a smaller one</summary> */
+        private static void Addition( string largerNumber, string smallerNumber, ref string result, ref List<string> line )
         {
-            int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
-
-            LevelTheLength();
+            LevelTheLength( ref largerNumber, ref smallerNumber );
 
             int carry = 0;
             StringBuilder resultBuilder = new();
-            List<string> carryLine = new();
+            List<string> carryLine = new() { "0" };
 
-            for ( int i = maxLength - 1; i >= 0; i-- )
+            for ( int i = largerNumber.Length - 1; i >= 0; i-- )
             {
-                int firstDigit = FirstNumber[ i ] - '0';
-                int secondDigit = SecondNumber[ i ] - '0';
+                int firstDigit = largerNumber[ i ] - '0';
+                int secondDigit = smallerNumber[ i ] - '0';
 
                 int stepResult = firstDigit + secondDigit + carry;
 
@@ -137,8 +186,22 @@ namespace Calculator.Pages
                 carryLine.RemoveAt( 0 );
             }
 
-            Result = resultBuilder.ToString();
-            Line = carryLine;
+            result = resultBuilder.ToString();
+            line = carryLine;
+        }
+
+        private void LevelTheLength()
+        {
+            int maxLength = Math.Max( FirstNumber.Length, Math.Max( SecondNumber.Length, Result.Length ) );
+            FirstNumber = PadNumber( FirstNumber, maxLength );
+            SecondNumber = PadNumber( SecondNumber, maxLength );
+            Result = PadNumber( Result, maxLength );
+            Line = PadNumber( Line, maxLength );
+        }
+
+        private void FixZero()
+        {
+            if (Result == "-0") Result = "0";
         }
 
         private static string PadNumber( string number, int length )
@@ -147,20 +210,104 @@ namespace Calculator.Pages
             {
                 return number.PadLeft( length, '0' );
             }
-
             return number;
         }
 
-        private void LevelTheLength( bool withResult = false )
+        private static List<string> PadNumber( List<string> number, int length )
         {
-            int maxLength = Math.Max( FirstNumber.Length, SecondNumber.Length );
-            if ( withResult )
+            List<string> paddednumber = TrimList( number, "0" );
+            while ( paddednumber.Count < length )
             {
-                maxLength = Math.Max( maxLength, Result.Length );
-                Result = PadNumber( Result, maxLength );
+                paddednumber.Insert( 0, "0" );
             }
-            FirstNumber = PadNumber( FirstNumber, maxLength );
-            SecondNumber = PadNumber( SecondNumber, maxLength );
+            return paddednumber;
+        }
+
+        private static List<string> TrimList( List<string> list, string trim )
+        {
+            List<string> trimmedList = new( list );
+            if ( trimmedList.Count > 0 )
+            {
+                bool isTrimmed = !( trimmedList[ 0 ] == trim );
+                while ( !isTrimmed )
+                {
+                    trimmedList.RemoveAt( 0 );
+                    if ( trimmedList.Count > 0 )
+                    {
+                        isTrimmed = !( trimmedList[ 0 ] == trim );
+                    }
+                    else
+                    {
+                        isTrimmed = true;
+                    }
+                }
+            }
+
+            return trimmedList;
+        }
+
+        private static string MaxStringNumbers( string firstNumber, string secondNumber )
+        {
+            if ( firstNumber.Length > secondNumber.Length )
+            {
+                return firstNumber;
+            }
+            else if ( secondNumber.Length > firstNumber.Length )
+            {
+                return secondNumber;
+            }
+
+            for ( int i = 0; i < firstNumber.Length; i++ )
+            {
+                if ( firstNumber[ i ] > secondNumber[ i ] )
+                {
+                    return firstNumber;
+                }
+                else if ( secondNumber[ i ] > firstNumber[ i ] )
+                {
+                    return secondNumber;
+                }
+            }
+
+            return firstNumber;
+        }
+
+        private static string MinStringNumbers( string firstNumber, string secondNumber )
+        {
+            if ( firstNumber.Length < secondNumber.Length )
+            {
+                return firstNumber;
+            }
+            else if ( secondNumber.Length < firstNumber.Length )
+            {
+                return secondNumber;
+            }
+
+            for ( int i = 0; i < firstNumber.Length; i++ )
+            {
+                if ( firstNumber[ i ] < secondNumber[ i ] )
+                {
+                    return firstNumber;
+                }
+                else if ( secondNumber[ i ] < firstNumber[ i ] )
+                {
+                    return secondNumber;
+                }
+            }
+
+            return firstNumber;
+        }
+
+        private static void LevelTheLength( ref string firstString, ref string secondString )
+        {
+            int maxLength = Math.Max( firstString.Length, secondString.Length );
+            firstString = PadNumber( firstString, maxLength );
+            secondString = PadNumber( secondString, maxLength );
+        }
+
+        private static bool IsNegative( string number )
+        {
+            return number[ 0 ] == '-';
         }
     }
 }
