@@ -92,7 +92,6 @@ namespace Calculator.Pages
 
             if ( isNegative )
             {
-                (FirstNumber, SecondNumber) = (SecondNumber, FirstNumber);
                 Result = "-" + Result;
             }
 
