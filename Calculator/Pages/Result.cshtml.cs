@@ -34,7 +34,7 @@ namespace Calculator.Pages
             if ( isSecondNumberNegative ) secondNumber = secondNumber.TrimStart( '-' );
 
             string largerNumber = MaxStringNumbers( firstNumber, secondNumber );
-            string smallerNumber = MinStringNumbers( firstNumber, secondNumber );
+            string smallerNumber = largerNumber == firstNumber ? secondNumber : firstNumber;
 
             string result = string.Empty;
             List<string> line = new();
@@ -264,32 +264,6 @@ namespace Calculator.Pages
                     return firstNumber;
                 }
                 else if ( secondNumber[ i ] > firstNumber[ i ] )
-                {
-                    return secondNumber;
-                }
-            }
-
-            return firstNumber;
-        }
-
-        private static string MinStringNumbers( string firstNumber, string secondNumber )
-        {
-            if ( firstNumber.Length < secondNumber.Length )
-            {
-                return firstNumber;
-            }
-            else if ( secondNumber.Length < firstNumber.Length )
-            {
-                return secondNumber;
-            }
-
-            for ( int i = 0; i < firstNumber.Length; i++ )
-            {
-                if ( firstNumber[ i ] < secondNumber[ i ] )
-                {
-                    return firstNumber;
-                }
-                else if ( secondNumber[ i ] < firstNumber[ i ] )
                 {
                     return secondNumber;
                 }
