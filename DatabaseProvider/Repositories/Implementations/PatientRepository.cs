@@ -6,10 +6,12 @@ namespace DatabaseProvider.Repositories.Implementations
     public class PatientRepository : Repository<Patient>, IPatientRepository
     {
         public PatientRepository( ApplicationContext context ) : base( context ) { }
+
         public List<Patient> GetAll()
         {
             return Entities.ToList();
         }
+
         public Patient? GetById( int id )
         {
             return Entities.FirstOrDefault( p => p.PatientId == id );

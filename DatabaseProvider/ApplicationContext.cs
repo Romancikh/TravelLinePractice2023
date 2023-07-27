@@ -6,11 +6,14 @@ namespace DatabaseProvider
     public class ApplicationContext : DbContext
     {
         private readonly string? _connectionString;
+
         public ApplicationContext( DbContextOptions<ApplicationContext> options ) : base( options ) { }
+
         public ApplicationContext( string connectionString )
         {
             _connectionString = connectionString;
         }
+
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
         {
             if ( _connectionString == null )
@@ -19,6 +22,7 @@ namespace DatabaseProvider
             }
             optionsBuilder.UseSqlServer( _connectionString );
         }
+
         protected override void OnModelCreating( ModelBuilder modelBuilder )
         {
             modelBuilder.ApplyConfiguration( new DoctorConfiguration() );

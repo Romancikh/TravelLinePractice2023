@@ -13,6 +13,7 @@ namespace HospitalDb
         private static IDoctorRepository _doctorRepository;
         private static IPatientRepository _patientRepository;
         private static IReceptionRepository _receptionRepository;
+
         public static void Main( string[] args )
         {
             _applicationContext = new ApplicationContext( connectionString );
@@ -22,6 +23,7 @@ namespace HospitalDb
             PrintCommandsList();
             ProcessComands();
         }
+
         static void PrintCommandsList()
         {
             Console.WriteLine( "Available commands:" );
@@ -38,6 +40,7 @@ namespace HospitalDb
             Console.WriteLine( "\tlist-receptions-by-patient [patientId]" );
             Console.WriteLine( "\texit" );
         }
+
         static void ProcessComands()
         {
             while ( true )
@@ -89,6 +92,7 @@ namespace HospitalDb
                 }
             }
         }
+
         static void AddDoctor( List<string> parameters )
         {
             Doctor doctor = new()
@@ -100,6 +104,7 @@ namespace HospitalDb
             _doctorRepository?.Add( doctor );
             _doctorRepository?.SaveChanges();
         }
+
         static void RemoveDoctor( List<string> parameters )
         {
             int doctorId = int.Parse( parameters[ 0 ] );
@@ -110,6 +115,7 @@ namespace HospitalDb
                 _doctorRepository.SaveChanges();
             }
         }
+
         static void AddPatient( List<string> parameters )
         {
             Patient patient = new()
@@ -121,6 +127,7 @@ namespace HospitalDb
             _patientRepository.Add( patient );
             _patientRepository.SaveChanges();
         }
+
         static void RemovePatient( List<string> parameters )
         {
             int patientId = int.Parse( parameters[ 0 ] );
@@ -131,6 +138,7 @@ namespace HospitalDb
                 _patientRepository.SaveChanges();
             }
         }
+
         static void AddReception( List<string> parameters )
         {
             int roomNumber = int.Parse( parameters[ 0 ] );
@@ -152,6 +160,7 @@ namespace HospitalDb
                 _receptionRepository.SaveChanges();
             }
         }
+
         static void RemoveReception( List<string> parameters )
         {
             int receptionId = int.Parse( parameters[ 0 ] );
@@ -162,23 +171,28 @@ namespace HospitalDb
                 _receptionRepository.SaveChanges();
             }
         }
+
         static void ListDoctors()
         {
             _doctorRepository.GetAll().ForEach( ( doctor ) => Console.WriteLine( doctor ) );
         }
+
         static void ListPatients()
         {
             _patientRepository.GetAll().ForEach( ( patient ) => Console.WriteLine( patient ) );
         }
+
         static void ListReceptions()
         {
             _receptionRepository.GetAll().ForEach( ( reception ) => Console.WriteLine( reception ) );
         }
+
         static void ListReceptionsByDoctor( List<string> parameters )
         {
             int doctorId = int.Parse( parameters[ 0 ] );
             _receptionRepository.GetByDoctorId( doctorId ).ForEach( ( reception ) => Console.WriteLine( reception ) );
         }
+
         static void ListReceptionsByPatient( List<string> parameters )
         {
             int patientId = int.Parse( parameters[ 0 ] );
