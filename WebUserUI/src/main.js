@@ -1,8 +1,9 @@
-const resultContainer = document.getElementById("resultContainer");
-const resultOutput = document.getElementById("result");
+/* eslint-disable no-magic-numbers */
+const resultContainer = document.querySelector(".result");
+const resultOutput = document.querySelector(".result__text");
 const getAllButton = document.getElementById("getAll");
-const getButton = document.getElementById("get");
-const userIdAddInput = document.getElementById("userIdAdd");
+const getByIdButton = document.getElementById("getById");
+const userIdGetInput = document.getElementById("userIdGet");
 const createButton = document.getElementById("create");
 const createUserDataTextarea = document.getElementById("createUserData");
 const updateButton = document.getElementById("update");
@@ -13,24 +14,23 @@ const userIdDeleteInput = document.getElementById("userIdDelete");
 
 getAllButton.addEventListener("click", async event => {
   event.preventDefault();
-  resultContainer.classList.remove("d-none");
   const response = await fetch("/api/users");
   const jsonString = JSON.stringify(await response.json(), null, 2);
   resultOutput.textContent = jsonString;
+  resultContainer.classList.remove("result_hidden");
 });
 
-getButton.addEventListener("click", async event => {
+getByIdButton.addEventListener("click", async event => {
   event.preventDefault();
-  resultContainer.classList.remove("d-none");
-  const userId = userIdAddInput.value;
+  const userId = userIdGetInput.value;
   const response = await fetch(`/api/users/${userId}`);
   const jsonString = JSON.stringify(await response.json(), null, 2);
   resultOutput.textContent = jsonString;
+  resultContainer.classList.remove("result_hidden");
 });
 
 createButton.addEventListener("click", async event => {
   event.preventDefault();
-  resultContainer.classList.remove("d-none");
   const data = createUserDataTextarea.value;
   const response = await fetch(`/api/users`, {
     body: data,
@@ -42,11 +42,11 @@ createButton.addEventListener("click", async event => {
   });
   const jsonString = JSON.stringify(await response.json(), null, 2);
   resultOutput.textContent = jsonString;
+  resultContainer.classList.remove("result_hidden");
 });
 
 updateButton.addEventListener("click", async event => {
   event.preventDefault();
-  resultContainer.classList.remove("d-none");
   const data = updateUserDataTextarea.value;
   const userId = userIdUpdateInput.value;
   const response = await fetch(`/api/users/${userId}`, {
@@ -59,15 +59,16 @@ updateButton.addEventListener("click", async event => {
   });
   const jsonString = JSON.stringify(await response.json(), null, 2);
   resultOutput.textContent = jsonString;
+  resultContainer.classList.remove("result_hidden");
 });
 
 deleteButton.addEventListener("click", async event => {
   event.preventDefault();
-  resultContainer.classList.remove("d-none");
   const userId = userIdDeleteInput.value;
   const response = await fetch(`/api/users/${userId}`, {
     method: "delete",
   });
   const jsonString = JSON.stringify(await response.json(), null, 2);
   resultOutput.textContent = jsonString;
+  resultContainer.classList.remove("result_hidden");
 });
