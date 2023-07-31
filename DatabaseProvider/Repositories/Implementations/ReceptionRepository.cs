@@ -12,7 +12,7 @@ namespace DatabaseProvider.Repositories.Implementations
             return Entities.ToList();
         }
 
-        public Reception? GetById( int id )
+        public Reception GetById( int id )
         {
             return Entities.FirstOrDefault( r => r.ReceptionId == id );
         }

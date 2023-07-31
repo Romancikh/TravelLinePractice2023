@@ -101,14 +101,14 @@ namespace HospitalDb
                 LastName = parameters[ 1 ],
                 Specialty = parameters[ 2 ]
             };
-            _doctorRepository?.Add( doctor );
-            _doctorRepository?.SaveChanges();
+            _doctorRepository.Add( doctor );
+            _doctorRepository.SaveChanges();
         }
 
         static void RemoveDoctor( List<string> parameters )
         {
             int doctorId = int.Parse( parameters[ 0 ] );
-            Doctor? doctor = _doctorRepository.GetById( doctorId );
+            Doctor doctor = _doctorRepository.GetById( doctorId );
             if ( doctor != null )
             {
                 _doctorRepository.Remove( doctor );
@@ -131,7 +131,7 @@ namespace HospitalDb
         static void RemovePatient( List<string> parameters )
         {
             int patientId = int.Parse( parameters[ 0 ] );
-            Patient? patient = _patientRepository.GetById( patientId );
+            Patient patient = _patientRepository.GetById( patientId );
             if ( patient != null )
             {
                 _patientRepository.Remove( patient );
@@ -144,8 +144,8 @@ namespace HospitalDb
             int roomNumber = int.Parse( parameters[ 0 ] );
             int doctorId = int.Parse( parameters[ 1 ] );
             int patientId = int.Parse( parameters[ 2 ] );
-            Doctor? doctor = _doctorRepository.GetById( doctorId );
-            Patient? patient = _patientRepository.GetById( patientId );
+            Doctor doctor = _doctorRepository.GetById( doctorId );
+            Patient patient = _patientRepository.GetById( patientId );
             if ( patient != null && doctor != null )
             {
                 Reception reception = new()
@@ -164,7 +164,7 @@ namespace HospitalDb
         static void RemoveReception( List<string> parameters )
         {
             int receptionId = int.Parse( parameters[ 0 ] );
-            Reception? reception = _receptionRepository.GetById( receptionId );
+            Reception reception = _receptionRepository.GetById( receptionId );
             if ( reception != null )
             {
                 _receptionRepository.Remove( reception );
