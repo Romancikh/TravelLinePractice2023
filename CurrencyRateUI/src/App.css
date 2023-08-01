@@ -8,7 +8,6 @@
 .app {
   display: flex;
   width: 750px;
-  height: 420px;
   box-sizing: border-box;
   padding: 25px;
   border: 1px solid #d9d9d9;

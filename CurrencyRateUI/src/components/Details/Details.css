@@ -12,3 +12,9 @@
   height: 100%;
   flex-direction: column;
 }
+
+/* stylelint-disable-next-line selector-class-pattern */
+.currency-details__heading {
+  color: #202020;
+  font: 400 normal 24px / normal Inter, sans-serif;
+}
