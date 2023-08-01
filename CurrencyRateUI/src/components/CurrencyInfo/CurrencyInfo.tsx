@@ -5,6 +5,7 @@ import { CurrenciesContext } from "../../context/currencies";
 import getCurrencyCodes from "../../utils/getCurrencyCodesList";
 import { DetailsContext } from "../../context/details";
 import { SelectedCurrenciesContext } from "../../context/selectedCurrencies";
+import useExchangeRate from "../../hooks/useExchangeRate";
 
 type CurrencyInfoProps = {
   className: string;
@@ -18,6 +19,11 @@ function CurrencyInfo({ className }: CurrencyInfoProps) {
 
   const [options, setOptions] = useState<string[]>([]);
 
+  const [exchangeRate, exchangeDate] = useExchangeRate(
+    payment.code,
+    purchased.code
+  );
+
   useEffect(() => {
     setOptions(getCurrencyCodes(currencies));
   }, [currencies]);
@@ -29,9 +35,11 @@ function CurrencyInfo({ className }: CurrencyInfoProps) {
           1 {payment.name ?? "Loading..."} equals
         </h2>
         <h1 className="purchased-currency">
-          {1} {purchased.name ?? "Loading..."}
+          {exchangeRate} {purchased.name ?? "Loading..."}
         </h1>
-        <span className="update-time">{"updateDate"}</span>
+        <span className="update-time">
+          {new Date(exchangeDate).toLocaleString()}
+        </span>
       </div>
       <div className="currency-info__selector-container">
         <Selector
