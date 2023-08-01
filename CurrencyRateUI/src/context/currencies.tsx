@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { Currency } from "../types/Currency";
 
 type CurrenciesContextType = {
@@ -17,6 +17,12 @@ type CurrenciesProviderProps = {
 
 export function CurrenciesProvider({ children }: CurrenciesProviderProps) {
   const [currencies, setCurrencies] = useState<Currency[]>([]);
+
+  useEffect(() => {
+    fetch("/api/currencies")
+      .then((response) => response.json())
+      .then(setCurrencies);
+  }, []);
 
   return (
     <CurrenciesContext.Provider

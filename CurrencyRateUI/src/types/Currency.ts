@@ -3,5 +3,6 @@ export type Currency = {
   name: string;
   description: string;
   symbol: string;
-  quantity: number;
 };
+
+export type CurrencyWithQuantity = Currency & { quantity: number };

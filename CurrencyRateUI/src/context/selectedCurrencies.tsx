@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useState } from "react";
-import { Currency } from "../types/Currency";
+import { CurrencyWithQuantity } from "../types/Currency";
 
-const defaultCurrency: Currency = {
+const defaultCurrency: CurrencyWithQuantity = {
   code: "",
   name: "",
   description: "",
@@ -10,10 +10,10 @@ const defaultCurrency: Currency = {
 };
 
 type SelectedCurrenciesContextType = {
-  payment: Currency;
-  purchased: Currency;
-  setPayment: (newCurrency: Currency) => void;
-  setPurchased: (newCurrency: Currency) => void;
+  payment: CurrencyWithQuantity;
+  purchased: CurrencyWithQuantity;
+  setPayment: (newCurrency: CurrencyWithQuantity) => void;
+  setPurchased: (newCurrency: CurrencyWithQuantity) => void;
 };
 
 export const SelectedCurrenciesContext =
@@ -31,8 +31,9 @@ type SelectedCurrenciesProviderProps = {
 export function SelectedCurrenciesProvider({
   children,
 }: SelectedCurrenciesProviderProps) {
-  const [payment, setPayment] = useState<Currency>(defaultCurrency);
-  const [purchased, setPurchased] = useState<Currency>(defaultCurrency);
+  const [payment, setPayment] = useState<CurrencyWithQuantity>(defaultCurrency);
+  const [purchased, setPurchased] =
+    useState<CurrencyWithQuantity>(defaultCurrency);
 
   return (
     <SelectedCurrenciesContext.Provider
