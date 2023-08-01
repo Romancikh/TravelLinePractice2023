@@ -3,6 +3,7 @@ import Selector from "../Selector/Selector";
 import "./CurrencyInfo.css";
 import { CurrenciesContext } from "../../context/currencies";
 import getCurrencyCodes from "../../utils/getCurrencyCodesList";
+import { DescriptionContext } from "../../context/description";
 
 type CurrencyInfoProps = {
   className: string;
@@ -10,6 +11,8 @@ type CurrencyInfoProps = {
 
 function CurrencyInfo({ className }: CurrencyInfoProps) {
   const { currencies } = useContext(CurrenciesContext);
+  const { descriptionVisibility, setDescriptionVisibility } =
+    useContext(DescriptionContext);
 
   const [options, setOptions] = useState<string[]>([]);
 
@@ -38,7 +41,12 @@ function CurrencyInfo({ className }: CurrencyInfoProps) {
           className="currency-info__selector"
         />
       </div>
-      <button className="button currency-info__button">More details</button>
+      <button
+        className="button currency-info__button"
+        onClick={() => setDescriptionVisibility(!descriptionVisibility)}
+      >
+        {descriptionVisibility ? "Less" : "More"} details
+      </button>
     </div>
   );
 }
