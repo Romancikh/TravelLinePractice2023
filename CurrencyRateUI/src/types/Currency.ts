@@ -3,4 +3,5 @@ export type Currency = {
   name: string;
   description: string;
   symbol: string;
+  quantity: number;
 };
