@@ -7,26 +7,36 @@ import { CurrenciesContext } from "../../context/currencies";
 type SelectorProps = {
   id: "payment" | "purchased";
   options: string[];
+  exchangeRate: number;
   className?: string;
 };
 
-function Selector({ id, options, className }: SelectorProps) {
+function Selector({ id, options, exchangeRate, className }: SelectorProps) {
   const { payment, purchased, setPayment, setPurchased } = useContext(
     SelectedCurrenciesContext
   );
   const { currencies } = useContext(CurrenciesContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const quantity = parseFloat(parseFloat(event.target.value).toFixed(4));
+    const quantity = parseFloat(parseFloat(event.target.value).toFixed(3));
     if (id === "payment") {
       if (!isNaN(quantity)) {
         setPayment({ ...payment, quantity });
+        setPurchased({
+          ...purchased,
+          quantity: parseFloat((quantity * exchangeRate).toFixed(3)),
+        });
       } else {
         setPayment({ ...payment, quantity: 0 });
+        setPurchased({ ...purchased, quantity: 0 });
       }
     } else {
       if (!isNaN(quantity)) {
         setPurchased({ ...purchased, quantity });
+        setPayment({
+          ...payment,
+          quantity: parseFloat((quantity / exchangeRate).toFixed(3)),
+        });
       } else {
         setPurchased({ ...purchased, quantity: 0 });
       }
@@ -48,8 +58,16 @@ function Selector({ id, options, className }: SelectorProps) {
     } else {
       setPurchased({ ...currencies[0], quantity: 0 });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, currencies]);
+
+  useEffect(() => {
+    setPurchased({
+      ...purchased,
+      quantity: parseFloat((payment.quantity * exchangeRate).toFixed(3)),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [exchangeRate]);
 
   return (
     <>

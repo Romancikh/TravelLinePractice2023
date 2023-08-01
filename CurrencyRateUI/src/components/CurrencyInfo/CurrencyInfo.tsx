@@ -45,11 +45,13 @@ function CurrencyInfo({ className }: CurrencyInfoProps) {
         <Selector
           id="payment"
           options={options}
+          exchangeRate={parseFloat(exchangeRate)}
           className="currency-info__selector"
         />
         <Selector
           id="purchased"
           options={options}
+          exchangeRate={parseFloat(exchangeRate)}
           className="currency-info__selector"
         />
       </div>

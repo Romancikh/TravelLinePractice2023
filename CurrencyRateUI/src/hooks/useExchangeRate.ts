@@ -5,7 +5,7 @@ export default function useExchangeRate(
   payment: string,
   purchased: string
 ) {
-  const [exchangeRate, setExchangeRate] = useState(0);
+  const [exchangeRate, setExchangeRate] = useState("0");
   const [exchangeDate, setExchangeDate] = useState("");
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function useExchangeRate(
         await fetchPrices(payment, purchased, new Date(-10000))
       ).pop();
       if (price) {
-        setExchangeRate(price.price);
+        setExchangeRate(price.price.toString());
         setExchangeDate(price.dateTime);
       }
     };
