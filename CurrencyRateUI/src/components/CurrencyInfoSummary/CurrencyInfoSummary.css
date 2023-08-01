@@ -1,0 +1,17 @@
+.first-currency {
+  margin: 0;
+  color: #5e5e5e;
+  font: 400 normal 16px / normal Inter, sans-serif;
+}
+
+.second-currency {
+  margin: 0;
+  color: #202020;
+  font: 400 normal 24px / normal Inter, sans-serif;
+}
+
+.update-time {
+  margin: 0;
+  color: #5e5e5e;
+  font: 400 normal 12px / normal Inter, sans-serif;
+}
