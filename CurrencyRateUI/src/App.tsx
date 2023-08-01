@@ -2,15 +2,15 @@ import { useContext } from "react";
 import "./App.css";
 import CurrencyInfo from "./components/CurrencyInfo/CurrencyInfo";
 import Details from "./components/Details/Details";
-import { DescriptionContext } from "./context/description";
+import { DetailsContext } from "./context/details";
 
 function App() {
-  const { descriptionVisibility } = useContext(DescriptionContext);
+  const { detailsVisibility } = useContext(DetailsContext);
 
   return (
     <div className="app">
       <CurrencyInfo className="app_currency-info" />
-      {descriptionVisibility && <Details className="app__details" />}
+      {detailsVisibility && <Details className="app__details" />}
     </div>
   );
 }
