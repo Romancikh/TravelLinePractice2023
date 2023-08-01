@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext } from "react";
+import { ChangeEvent, useContext, useEffect } from "react";
 import "./Selector.css";
 import { SelectedCurrenciesContext } from "../../context/selectedCurrencies";
 import getCurrencyByCode from "../../utils/getCurrencyByCode";
@@ -17,7 +17,7 @@ function Selector({ id, options, className }: SelectorProps) {
   const { currencies } = useContext(CurrenciesContext);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const quantity = parseFloat(event.target.value);
+    const quantity = parseFloat(parseFloat(event.target.value).toFixed(4));
     if (id === "payment") {
       if (!isNaN(quantity)) {
         setPayment({ ...payment, quantity });
@@ -41,6 +41,15 @@ function Selector({ id, options, className }: SelectorProps) {
       setPurchased({ ...newCurrency, quantity: purchased.quantity });
     }
   };
+
+  useEffect(() => {
+    if (id === "payment") {
+      setPayment({ ...currencies[0], quantity: 0 });
+    } else {
+      setPurchased({ ...currencies[0], quantity: 0 });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, currencies]);
 
   return (
     <>

@@ -4,13 +4,13 @@
   flex-direction: column;
 }
 
-.first-currency {
+.payment-currency {
   margin: 0;
   color: #5e5e5e;
   font: 400 normal 16px / normal Inter, sans-serif;
 }
 
-.second-currency {
+.purchased-currency {
   margin: 0;
   color: #202020;
   font: 400 normal 24px / normal Inter, sans-serif;
