@@ -23,10 +23,7 @@
     }
     static void Main( string[] args )
     {
-        List<int> unsortedList = new()
-        {
-            5, 9, 1, 8, 2, 7, 4, 6, 3, 10, 5, 11, 4
-        };
+        List<int> unsortedList = new() { 5, 9, 1, 8, 2, 7, 4, 6, 3, 10, 5, 11, 4 };
         List<int> sortedList = BubbleSort( unsortedList );
         Console.WriteLine( $"Unsorted list: {string.Join( ", ", unsortedList )}" );
         Console.WriteLine( $"Sorted list: {string.Join( ", ", sortedList )}" );
